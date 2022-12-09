@@ -1,31 +1,30 @@
-import javax.swing.JButton;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
-public class Button extends JButton implements ActionListener{
+public class Button extends JButton implements ActionListener {
 	private String name;
 	private BlackjackController controller;
-	
-	public Button(String n, BlackjackController c) {
+	private ImageIcon image;
+
+	public Button(String n, String img, BlackjackController c) {
 		super(n);
-		name = n;
-		controller = c;
-		addActionListener(this);
+		this.name = n;
+		this.image = new ImageIcon(img);
+		this.setIcon(this.image);
+		this.controller = c;
+		this.addActionListener(this);
 	}
-	
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		if (name.equals("continue")) {
 			controller.firstGame();
+		} else if (name.equals("")) {
+			this.controller.hitted();
+		} else if (name.equals("stay")) {
+			this.controller.stay();
 		}
-		else if (name.equals("hit")) {
-			controller.hitted();
-		}
-		else if (name.equals("stay")){
-			controller.stay();
-		}
-		
+
 	}
-	
 }
