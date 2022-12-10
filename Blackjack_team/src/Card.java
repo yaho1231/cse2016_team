@@ -38,16 +38,16 @@ public class Card {
 	
 	public ImageIcon getImg() {
 		ImageIcon imgIcon;
-		if (rank == 1)
-			imgIcon = new ImageIcon("images/ace_of_"+suit+".png");
-		else if (rank == 11)
-			imgIcon = new ImageIcon("images/jack_of_"+suit+".png");
-		else if (rank == 12)
-			imgIcon = new ImageIcon("images/queen_of_"+suit+".png");
-		else if (rank == 13)
-			imgIcon = new ImageIcon("images/king_of_"+suit+".png");
-		else
-			imgIcon = new ImageIcon("images/"+Integer.toString(rank)+"_of_"+suit+".png");
+//		if (rank == 1)
+//			imgIcon = new ImageIcon("images/ace_of_"+suit+".png");
+//		else if (rank == 11)
+//			imgIcon = new ImageIcon("images/jack_of_"+suit+".png");
+//		else if (rank == 12)
+//			imgIcon = new ImageIcon("images/queen_of_"+suit+".png");
+//		else if (rank == 13)
+//			imgIcon = new ImageIcon("images/king_of_"+suit+".png");
+//		else
+		imgIcon = new ImageIcon(".\\cardimage\\"+suit+"-"+Integer.toString(rank)+".png");
 		Image resized_img = (imgIcon.getImage()).getScaledInstance(80, 100, java.awt.Image.SCALE_SMOOTH);
 		
 		return new ImageIcon(resized_img);
