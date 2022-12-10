@@ -92,9 +92,7 @@ public class BlackjackFrame extends JFrame{
 		setTitle("Black Jack");
 		setVisible(true);
 		setDefaultCloseOperation(3);
-		setTitle("Black Jack");
-		setVisible(true);
-		setDefaultCloseOperation(3);
+		setResizable(false);
 	}
 	
 	public void update(String wins) {
