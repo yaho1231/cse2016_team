@@ -84,15 +84,21 @@ public class BlackjackFrame extends JFrame{
 			win_who.setText("");
 		
 		for (int i=0; i<cards_player.length && cards_player[i] != null; i++) {
-			player_cards_panel.add(new JButton(cards_player[i].getImg()));
+			JButton b = new JButton(cards_player[i].getImg());
+			b.setPreferredSize(new Dimension(80, 100));
+			player_cards_panel.add(b);
 		}
 		
 		for (int i=1; i<cards_dealer.length && cards_dealer[i] != null; i++) {
-			dealer_cards_panel.add(new JButton(cards_dealer[i].getImg()));
+			JButton b = new JButton(cards_dealer[i].getImg());
+			b.setPreferredSize(new Dimension(80, 100));
+			dealer_cards_panel.add(b);
 		}
 		
 		if (wins.length() > 0) {
-			dealer_cards_panel.add(new JButton(cards_dealer[0].getImg()));
+			JButton b = new JButton(cards_dealer[0].getImg());
+			b.setPreferredSize(new Dimension(80, 100));
+			dealer_cards_panel.add(b);
 		}
 		
 		continue_button.setText("continue");
