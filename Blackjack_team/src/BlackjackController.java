@@ -124,6 +124,12 @@ public class BlackjackController {
 	public String playerName() {
 		return hand_player.name();
 	}
-	
+	public int playerScore() {
+		return hand_player.totalScore();
+	}
+
+	public int dealerScore() {
+		return hand_dealer.totalScore();
+	}
 }
 

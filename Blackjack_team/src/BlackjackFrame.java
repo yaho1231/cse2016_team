@@ -50,38 +50,24 @@ public class BlackjackFrame extends JFrame{
 		continue_button = new Button("continue", null, controller);
 		continue_button.setBounds(423, 280, 150, 30);
 		control_area.add(continue_button);
+
 		stay_button = new Button("stay", null, controller);
 		stay_button.setBounds(423, 320, 150, 30);
 		control_area.add(stay_button);
 
-		player_info = new JLabel("Player: ");
-		player_info.setBounds(10, 320, 150, 30);
-		player_info.setFont(new Font("Serif", 1, 25));
-		player_info.setForeground(Color.WHITE);
+		player_info = new InfoLabel("Player", 10,320);
 		control_area.add(player_info);
 
-		dealer_info = new JLabel("Dealer: ");
-		dealer_info.setBounds(10, 5, 150, 30);
-		dealer_info.setFont(new Font("Serif", 1, 25));
-		dealer_info.setForeground(Color.WHITE);
+		dealer_info = new InfoLabel("Dealer", 10,5);
 		control_area.add(dealer_info);
 
-		name_info = new JLabel(controller.playerName());
-		name_info.setBounds(450, 35, 150, 30);
-		name_info.setFont(new Font("Serif", 1, 25));
-		name_info.setForeground(Color.WHITE);
+		name_info = new InfoLabel(controller.playerName(), 450, 35);
 		control_area.add(name_info);
 
-		chip_info = new JLabel("Chips: " + controller.playerChips());
-		chip_info.setBounds(450, 5, 150, 30);
-		chip_info.setFont(new Font("Serif", 1, 25));
-		chip_info.setForeground(Color.WHITE);
+		chip_info = new InfoLabel("Chips: " + controller.playerChips(), 450, 5);
 		control_area.add(chip_info);
 
-		win_who = new JLabel("");
-		win_who.setBounds(10, 162, 150, 30);
-		win_who.setFont(new Font("Serif", 1, 25));
-		win_who.setForeground(Color.WHITE);
+		win_who = new InfoLabel("", 10, 162);
 		control_area.add(win_who);
 
 		dealer_cards_panel.add(new JLabel(new ImageIcon("card-back.png")));
@@ -100,7 +86,10 @@ public class BlackjackFrame extends JFrame{
 		cards_dealer = controller.getCards("dealer");
 		player_cards_panel.removeAll();
 		dealer_cards_panel.removeAll();
+
+		player_info.setText("Player: " + controller.playerScore());
 		chip_info.setText("Chips: " + controller.playerChips());
+
 		for (Card card : cards_player) {
 			// player_cards_panel.add(new JLabel(card.getImg()));
 			player_cards_panel.add(new JLabel(card.getSuit() + card.getRank()));
@@ -111,6 +100,8 @@ public class BlackjackFrame extends JFrame{
 			// dealer_cards_panel.add(new JLabel(cards_dealer[0].getImg()));
 			dealer_cards_panel.add(new JLabel(cards_dealer[0].getSuit() + cards_dealer[0].getRank()));
 			dealer_cards_panel.add(new JLabel(new ImageIcon("card-back.png")));
+			dealer_info.setText("Dealer: ??");
+			win_who.setText("");
 		}
 		// match end
 		else {
@@ -118,8 +109,10 @@ public class BlackjackFrame extends JFrame{
 				//dealer_cards_panel.add(new JLabel(card.getImg()));
 				dealer_cards_panel.add(new JLabel(card.getSuit() + card.getRank()));
 			}
+			dealer_info.setText("Dealer: " + controller.dealerScore());
 			win_who.setText(wins + " wins!");
 		}
+		repaint();
 	}
 	
 	public Button getStayButton() {
