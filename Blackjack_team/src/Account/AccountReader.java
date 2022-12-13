@@ -58,7 +58,7 @@ public class AccountReader {
 		}
 		catch (RuntimeException e) {
 			System.out.println("AccountReader Error - bad record format: " + e.getMessage() + " Skipping");
-			result = getNextRecord(); // ´ÙÀ½ ÁÙ ½Ãµµ
+			result = getNextRecord(); // ë‹¤ìŒ ì¤„ ì‹œë„
 		}
 		return result;
 	}

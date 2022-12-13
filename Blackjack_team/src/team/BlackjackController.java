@@ -16,7 +16,7 @@ public class BlackjackController {
 	BlackjackController(Dealer d) {
 		dealer = d;
 		hand_dealer = new ComputerPlayer(MAX_CARDS);
-		NAME = JOptionPane.showInputDialog("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.");
+		NAME = JOptionPane.showInputDialog("ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		account = new AccountController();
 		account.login(NAME);
 		hand_player = new HumanPlayer(MAX_CARDS, NAME, account.getScore());
@@ -28,16 +28,16 @@ public class BlackjackController {
 
 		int con;
 		if(!first)
-			con = JOptionPane.showConfirmDialog(null, "°è¼Ó ÇÏ½Ã°Ú½À´Ï±î?", "Continue", JOptionPane.YES_NO_OPTION);
+			con = JOptionPane.showConfirmDialog(null, "ê³„ì† í•˜ì‹œê² ìŠµë‹ˆê¹Œ?", "Continue", JOptionPane.YES_NO_OPTION);
 		else {
 			con = JOptionPane.YES_OPTION;
 			first = false;
 		}
-		// À¯Àú º¯°æ
+		// ìœ ì € ë³€ê²½
 		if (con != JOptionPane.YES_OPTION){
 			account.setScore(hand_player.countChips());
 			account.logout();
-			NAME = JOptionPane.showInputDialog("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.");
+			NAME = JOptionPane.showInputDialog("ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.");
 			if(NAME == null)	return;
 			account.login(NAME);
 			hand_player = new HumanPlayer(MAX_CARDS, NAME, account.getScore());
