@@ -1,4 +1,4 @@
-package Account;
+package account;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -58,7 +58,7 @@ public class AccountReader {
 		}
 		catch (RuntimeException e) {
 			System.out.println("AccountReader Error - bad record format: " + e.getMessage() + " Skipping");
-			result = getNextRecord(); // ë‹¤ìŒ ì¤„ ì‹œë„
+			result = getNextRecord(); // ´ÙÀ½ ÁÙ ½Ãµµ
 		}
 		return result;
 	}

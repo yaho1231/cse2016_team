@@ -1,4 +1,4 @@
-package Account;
+package account;
 
 import java.io.File;
 
@@ -9,9 +9,9 @@ public class AccountController {
 
 
 	/**
-	 * ì•„ì´ë””ë¥¼ ë°›ì•„ ë¡œê·¸ì¸í•œë‹¤.
-	 * @param id ì•„ì´ë””
-	 * @return ê¸°ì¡´ íšŒì›ì´ë©´ true, ìƒˆë¡œìš´ íšŒì›ì´ë©´ false
+	 * ¾ÆÀÌµğ¸¦ ¹Ş¾Æ ·Î±×ÀÎÇÑ´Ù.
+	 * @param id ¾ÆÀÌµğ
+	 * @return ±âÁ¸ È¸¿øÀÌ¸é true, »õ·Î¿î È¸¿øÀÌ¸é false
 	 */
 	public boolean login(String id){
 		AccountReader reader = new AccountReader(filename);
