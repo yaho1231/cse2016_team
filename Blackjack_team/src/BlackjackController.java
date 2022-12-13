@@ -1,4 +1,4 @@
-import Account.AccountController;
+import account.AccountController;
 
 import javax.swing.JOptionPane;
 
@@ -25,12 +25,19 @@ public class BlackjackController {
 	
 	public void firstGame() {	// also triggered by continue button
 
-		int con = JOptionPane.showConfirmDialog(null, "계속 하시겠습니까?", "Continue", JOptionPane.YES_NO_OPTION);
+		int con;
+		if(!first)
+			con = JOptionPane.showConfirmDialog(null, "계속 하시겠습니까?", "Continue", JOptionPane.YES_NO_OPTION);
+		else {
+			con = JOptionPane.YES_OPTION;
+			first = false;
+		}
 		// 유저 변경
 		if (con != JOptionPane.YES_OPTION){
 			account.setScore(hand_player.countChips());
 			account.logout();
 			NAME = JOptionPane.showInputDialog("이름을 입력하세요.");
+			if(NAME == null)	return;
 			account.login(NAME);
 			hand_player = new HumanPlayer(MAX_CARDS, NAME, account.getScore());
 		}
@@ -124,6 +131,11 @@ public class BlackjackController {
 	public String playerName() {
 		return hand_player.name();
 	}
-	
-}
+	public int playerScore() {
+		return hand_player.totalScore();
+	}
 
+	public int dealerScore() {
+		return hand_dealer.totalScore();
+	}
+}
