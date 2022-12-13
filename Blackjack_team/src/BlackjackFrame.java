@@ -1,13 +1,6 @@
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 
 public class BlackjackFrame extends JFrame{
 	private BlackjackController controller;
@@ -20,56 +13,68 @@ public class BlackjackFrame extends JFrame{
 	private JPanel dealer_cards_panel;
 	private JLabel win_who;
 	private JLabel player_info;
+	private JLabel dealer_info;
+	private JLabel name_info;
+	private JLabel chip_info;
 	
 	public BlackjackFrame(BlackjackController c) {
 		controller = c;
-		continue_button = new Button("continue", controller);
-		hit_button = new Button("hit", controller);
-		stay_button = new Button("stay", controller);
-		
-		Container cp = getContentPane();
-		cp.setLayout(new GridLayout(5, 1));
-		
-		// first line setting (Dealer Information)
-		JPanel first_line = new JPanel();
-		first_line.setLayout(new GridLayout(1,2));
-		JLabel dealer_info = new JLabel("Dealer:");
-		dealer_info.setFont(new Font("Serif", Font.BOLD, 25));
-		dealer_cards_panel = new JPanel();
-		dealer_cards_panel.setLayout(new FlowLayout());
-		dealer_cards_panel.setFont(new Font("Serif", Font.PLAIN, 20));
-		first_line.add(dealer_info);
-		first_line.add(dealer_cards_panel);
-		
-		// second line setting (Player Information)
-		JPanel second_line = new JPanel();
-		second_line.setLayout(new GridLayout(1,2));
-		player_info = new JLabel(controller.playerName()+" (0) ");
-		player_info.setFont(new Font("Serif", Font.BOLD, 25));
-		player_cards_panel = new JPanel();
-		player_cards_panel.setLayout(new FlowLayout());
-		player_cards_panel.setFont(new Font("Serif", Font.PLAIN, 20));
-		second_line.add(player_info);
-		second_line.add(player_cards_panel);
-		
-		win_who = new JLabel("");
+		continue_button = new Button("continue", null, controller);
+//		hit_button = new Button("", ".//cardimage//card-back.png", controller);
+		stay_button = new Button("stay", null, controller);
+		Color board_green = new Color(1, 102, 52);
+		Color deck_green = new Color(0, 75, 37);
 
-		cp.add(first_line);
-		cp.add(second_line);
-		cp.add(win_who);	// third line-1
-		cp.add(continue_button);	// third line-2
-		
-		// fourth line setting (hit and stay buttons)
-		JPanel fourth_line = new JPanel();
-		fourth_line.setLayout(new GridLayout(1,2));
-		fourth_line.add(hit_button);
-		fourth_line.add(stay_button);
-		cp.add(fourth_line);
-		
+		Container cp = getContentPane();
+		cp.setLayout(new BorderLayout());
+
+		dealer_cards_panel = new JPanel();
+		cp.add(dealer_cards_panel, "North");
+		dealer_cards_panel.setLayout(new FlowLayout());
+		dealer_cards_panel.setBackground(deck_green);
+
+		player_cards_panel = new JPanel();
+		cp.add(player_cards_panel, "South");
+		player_cards_panel.setLayout(new FlowLayout());
+		player_cards_panel.setBackground(deck_green);
+
+		JPanel control_area = new JPanel();
+		cp.add(control_area, "Center");
+		control_area.setLayout(null);
+		control_area.setBackground(board_green);
+
+		hit_button = new Button("", ".//cardimage//card-back.png", controller);
+		hit_button.setBounds(242, 110, 100, 140);
+		control_area.add(hit_button);
+
+		continue_button = new Button("continue", null, controller);
+		continue_button.setBounds(423, 280, 150, 30);
+		control_area.add(continue_button);
+
+		stay_button = new Button("stay", null, controller);
+		stay_button.setBounds(423, 320, 150, 30);
+		control_area.add(stay_button);
+
+		player_info = new InfoLabel("Player", 10,320);
+		control_area.add(player_info);
+
+		dealer_info = new InfoLabel("Dealer", 10,5);
+		control_area.add(dealer_info);
+
+		name_info = new InfoLabel(controller.playerName(), 450, 35);
+		control_area.add(name_info);
+
+		chip_info = new InfoLabel("Chips: " + controller.playerChips(), 450, 5);
+		control_area.add(chip_info);
+
+		win_who = new InfoLabel("", 10, 162);
+		control_area.add(win_who);
+
+		setSize(600, 700);
 		setTitle("Black Jack");
-		setSize(1100, 1000);
 		setVisible(true);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(3);
+		setResizable(false);
 	}
 	
 	public void update(String wins) {
@@ -77,32 +82,29 @@ public class BlackjackFrame extends JFrame{
 		cards_dealer = controller.getCards("dealer");
 		player_cards_panel.removeAll();
 		dealer_cards_panel.removeAll();
-		
-		if (wins.length() > 0)
-			win_who.setText(wins+" wins!");
-		else
-			win_who.setText("");
-		
-		for (int i=0; i<cards_player.length && cards_player[i] != null; i++) {
-			player_cards_panel.add(new JButton(cards_player[i].getImg()));
-		}
-		
-		for (int i=1; i<cards_dealer.length && cards_dealer[i] != null; i++) {
-			dealer_cards_panel.add(new JButton(cards_dealer[i].getImg()));
-		}
-		
-		if (wins.length() > 0) {
-			dealer_cards_panel.add(new JButton(cards_dealer[0].getImg()));
-		}
-		
-		continue_button.setText("continue");
-		hit_button.setText("hit");
-		stay_button.setText("stay");
-		player_info.setText(controller.playerName()+" ("+controller.playerChips()+") ");
-		revalidate();
-		repaint();
-		setVisible(true);
 
+		player_info.setText("Player: " + controller.playerScore());
+		chip_info.setText("Chips: " + controller.playerChips());
+
+		for (Card card : cards_player) {
+			player_cards_panel.add(new JLabel(card.getImg()));
+		}
+
+		// match not end
+		if (wins.equals("")){
+			dealer_cards_panel.add(new JLabel(cards_dealer[0].getImg()));
+			dealer_info.setText("Dealer: ??");
+			win_who.setText("");
+		}
+		// match end
+		else {
+			for (Card card : cards_dealer) {
+				dealer_cards_panel.add(new JLabel(card.getImg()));
+			}
+			dealer_info.setText("Dealer: " + controller.dealerScore());
+			win_who.setText(wins + " wins!");
+		}
+		repaint();
 	}
 	
 	public Button getStayButton() {
