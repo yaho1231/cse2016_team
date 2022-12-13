@@ -1,4 +1,3 @@
-/Account/
 /Blackjack.class
 /BlackjackController.class
 /BlackjackFrame.class
@@ -11,3 +10,4 @@
 /Dealer.class
 /HumanPlayer.class
 /InfoLabel.class
+/account/
