@@ -41,7 +41,7 @@ public class Card {
 	public ImageIcon getImg() {
 		ImageIcon imgIcon;
 		imgIcon = new ImageIcon(".//cardimage//"+suit+"-"+Integer.toString(rank)+".png");
-		Image resized_img = (imgIcon.getImage()).getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH);
+		Image resized_img = (imgIcon.getImage()).getScaledInstance(80, 110, java.awt.Image.SCALE_SMOOTH);
 		
 		return new ImageIcon(resized_img);
 	}

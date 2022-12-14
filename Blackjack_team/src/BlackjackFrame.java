@@ -70,7 +70,7 @@ public class BlackjackFrame extends JFrame{
 		win_who = new InfoLabel("", 10, 162);
 		control_area.add(win_who);
 
-		setSize(600, 700);
+		setSize(600, 640);
 		setTitle("Black Jack");
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -94,7 +94,7 @@ public class BlackjackFrame extends JFrame{
 		// match not end
 		if (wins.equals("")){
 			dealer_cards_panel.add(new JLabel(cards_dealer[0].getImg()));
-			dealer_cards_panel.add(new JLabel(new ImageIcon(".//cardimage//card-back.png")));
+			dealer_cards_panel.add(new JLabel(new ImageIcon(".//cardimage//card-back-small.png")));
 			dealer_info.setText("Dealer: ??");
 			win_who.setText("");
 		}
