@@ -4,7 +4,7 @@ import java.io.File;
 
 public class AccountController {
 
-	private final String filename = "/Users/seongdongjin/Downloads/프설방/a/cse2016_team/Blackjack_team/accounts.csv";
+	private final String filename = "accounts.csv";
 	private Account account;
 
 

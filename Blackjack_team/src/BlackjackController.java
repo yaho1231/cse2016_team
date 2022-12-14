@@ -16,7 +16,9 @@ public class BlackjackController {
 	BlackjackController(Dealer d) {
 		dealer = d;
 		hand_dealer = new ComputerPlayer(MAX_CARDS);
-		NAME = JOptionPane.showInputDialog("이름을 입력하세요.");
+		while (NAME == null || NAME.equals("")) {
+			NAME = JOptionPane.showInputDialog("이름을 입력하세요.");
+		}
 		account = new AccountController();
 		account.login(NAME);
 		hand_player = new HumanPlayer(MAX_CARDS, NAME, account.getScore());
@@ -26,27 +28,27 @@ public class BlackjackController {
 	
 	public void firstGame() {	// also triggered by continue button
 
-		int con;
 		if(!first) {
-//			con = JOptionPane.showConfirmDialog(null, "계속 하시겠습니까?", "Continue", JOptionPane.YES_NO_CANCEL_OPTION);
 			String[] buttons = {"종료", "새로운 계정", "기존 계정"};
-	        con = JOptionPane.showOptionDialog(null, "계속 하시겠습니까?", "continue",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "기존 계정");
-	       System.out.println(con);
-	       }
-		else {
-			con = JOptionPane.YES_OPTION;
-			first = false;
-		}
-		// 유저 변경
-		if (con != JOptionPane.YES_OPTION){
-			account.setScore(hand_player.countChips());
-			account.logout();
-			NAME = JOptionPane.showInputDialog("이름을 입력하세요.");
-			if(NAME == null)	return;
-			account.login(NAME);
-			hand_player = new HumanPlayer(MAX_CARDS, NAME, account.getScore());
-		}
-
+	        int con = JOptionPane.showOptionDialog(null, "계속 하시겠습니까?", "continue",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "기존 계정");
+			// 종료
+			if(con == 0) {
+				account.logout();
+	        	System.exit(0);
+	        }
+			// 새로운 계정
+			else if(con == 1) {
+				account.setScore(hand_player.countChips());
+				account.logout();
+				NAME = null;
+				while (NAME == null || NAME.equals("")) {
+					NAME = JOptionPane.showInputDialog("이름을 입력하세요.");
+				}
+				account.login(NAME);
+				hand_player = new HumanPlayer(MAX_CARDS, NAME, account.getScore());
+	        }
+	   	}
+		first = false;
 
 		hand_player.cardsReset(MAX_CARDS);
 		hand_dealer.cardsReset(MAX_CARDS);

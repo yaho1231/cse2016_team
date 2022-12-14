@@ -21,9 +21,7 @@ public class BlackjackFrame extends JFrame{
 	
 	public BlackjackFrame(BlackjackController c) {
 		controller = c;
-		continue_button = new Button("continue", null, controller);
-//		hit_button = new Button("", ".//cardimage//card-back.png", controller);
-		stay_button = new Button("stay", null, controller);
+
 		Color board_green = new Color(1, 102, 52);
 		Color deck_green = new Color(0, 75, 37);
 
@@ -72,14 +70,10 @@ public class BlackjackFrame extends JFrame{
 		win_who = new InfoLabel("", 10, 162);
 		control_area.add(win_who);
 
-//		dealer_cards_panel.add(new JLabel(new ImageIcon(".\\cardimage\\SPADE-1.png")));
-//		player_cards_panel.add(new JLabel(new ImageIcon(".\\cardimage\\SPADE-1.png")));
-//		player_cards_panel.add(new JLabel(new ImageIcon("card-back.png")));
-
 		setSize(600, 700);
 		setTitle("Black Jack");
 		setVisible(true);
-		setDefaultCloseOperation(3);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
 	}
 	
@@ -91,17 +85,16 @@ public class BlackjackFrame extends JFrame{
 
 		player_info.setText("Player: " + controller.playerScore());
 		chip_info.setText("Chips: " + controller.playerChips());
+		name_info.setText(controller.playerName());
 
 		for (Card card : cards_player) {
-			// player_cards_panel.add(new JLabel(card.getImg()));
 			player_cards_panel.add(new JLabel(card.getImg()));
 		}
 
 		// match not end
 		if (wins.equals("")){
-			// dealer_cards_panel.add(new JLabel(cards_dealer[0].getImg()));
-//			dealer_cards_panel.add(new JLabel(cards_dealer[0].getSuit() + cards_dealer[0].getRank()));
 			dealer_cards_panel.add(new JLabel(cards_dealer[0].getImg()));
+			dealer_cards_panel.add(new JLabel(new ImageIcon(".//cardimage//card-back.png")));
 			dealer_info.setText("Dealer: ??");
 			win_who.setText("");
 		}
